@@ -3,7 +3,7 @@ pipeline{
   stages{
     stage('build'){
       steps{
-        sh 'cd frontend && docker build'
+        sh 'docker-compose down && docker-compose up -d --build'
       }
     }
     stage('test frontend'){
