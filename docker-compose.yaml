@@ -16,7 +16,7 @@ services:
       published: 5001
       protocol: tcp
     environment:
-    - DATABASE_URI=mysql+pymysql://admin:CatTree&Blu3@practical-project-db.cnhjmopv3ify.eu-west-1.rds.amazonaws.com:3306/users
+    - DATABASE_URI=mysql+pymysql://admin:CatTreeBlu3@practical-project-devops-db.cnhjmopv3ify.eu-west-1.rds.amazonaws.com:3306/users
     - SECRET_KEY=secretkey
 
   nginx:
