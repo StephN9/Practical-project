@@ -5,7 +5,7 @@ pipeline{
       steps{
         withCredentials([file(credentialsId: 'DOCKER_COMPOSE', variable: 'DOCKER_COMPOSE')]) {
           sh 'cp "$DOCKER_COMPOSE" ./docker-compose.yaml'
-          sh 'docker-compose down && docker-compose up -d'
+          sh 'docker-compose build'
           sh 'rm docker-compose.yaml'          
         }
       }
@@ -31,3 +31,4 @@ pipeline{
     }
   }
 }
+
