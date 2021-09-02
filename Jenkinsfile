@@ -16,11 +16,10 @@ pipeline{
 	sh 'cd backend && python3 -m pytest'
       }
     }   
-    stage('deploy')
-     steps{
-	sh 'docker stack deploy docker-compose.yaml'
-     }
-    }
+ #   stage('deploy')
+  #   steps{
+#	sh 'docker stack deploy docker-compose.yaml'
+ #    }
+  #  }
    }
-  }
 }
