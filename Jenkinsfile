@@ -3,22 +3,30 @@ pipeline{
   stages{
     stage('build'){
       steps{
-        sh 'docker-compose down && docker-compose up -d --build'
+        withCredentials([file(credentialsId: 'DOCKER_COMPOSE', variable: 'DOCKER_COMPOSE')]) {
+          sh 'cp "$DOCKER_COMPOSE" ./docker-compose.yaml'
+          sh 'docker-compose down && docker-compose up -d'
+          sh 'rm docker-compose.yaml'          
+        }
       }
     }
     stage('test frontend'){
       steps{
-        sh 'cd frontend && python3 -m pytest' 
+        sh 'cd frontend && python3 -m pytest'
       }
     }
     stage('test backend'){
       steps{
-	sh 'cd backend && python3 -m pytest'
+        sh 'cd backend && python3 -m pytest'
       }
-    }   
+    }
     stage('deploy'){
       steps{
-	sh 'docker stack deploy --compose-file docker-compose.yaml practical-project-stack'
+        withCredentials([file(credentialsId: 'DOCKER_COMPOSE', variable: 'DOCKER_COMPOSE')]) {
+          sh 'cp "$DOCKER_COMPOSE" ./docker-compose.yaml'
+          sh 'docker stack deploy --compose-file docker-compose.yaml practical-project-stack'
+          sh 'rm docker-compose.yaml' 
+        }
       }
     }
   }
