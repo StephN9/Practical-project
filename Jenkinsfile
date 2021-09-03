@@ -28,12 +28,8 @@ pipeline{
           sh 'rm docker-compose.yaml' 
         }
       }
-    }    
-   }
-#  post {
- #   always {
-  #    junit 'build/reports/**/*.xml'
-   # }
-  #}
+    } 
+  }    
+ 
 }
 
