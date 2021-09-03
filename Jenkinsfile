@@ -12,14 +12,25 @@ pipeline{
     }
     stage('test frontend'){
       steps{
-        sh 'cd frontend && python3 -m pytest'
+        sh 'cd frontend && python3 -m pytest > frontendtest.txt'
+      }
+      post {
+        always {
+            archiveArtifacts artifacts: 'frontend/frontendtest.txt', onlyIfSuccessful: true
+        }
       }
     }
     stage('test backend'){
       steps{
-        sh 'cd backend && python3 -m pytest'
+        sh 'cd backend && python3 -m pytest > backendtest.txt'
+      }
+      post {
+        always {
+            archiveArtifacts artifacts: 'backend/backendtest.txt', onlyIfSuccessful: true
+        }
       }
     }
+    
     stage('deploy'){
       steps{
         withCredentials([file(credentialsId: 'DOCKER_COMPOSE', variable: 'DOCKER_COMPOSE')]) {
@@ -32,4 +43,3 @@ pipeline{
   }    
  
 }
-
