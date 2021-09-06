@@ -105,21 +105,27 @@ We used this Scrum Board throughout the project and created sprints for groups o
 Another area of project management that we focused on before starting to work on our project, was a risk assessment matrix. We created a list of risks which we thought could negatively impact the project. We also used this throughout the project and have been adding to it when it has become apparent that a risk might occur or needs to be mitigated. We identified 10 risks that our project could be susceptible to, and created a table for these risks. Within this table we identified the following for each risk; the risk, an evaluation of the risk, the likelihood and impact, as well as how is responsible for that risk, what would happen if the risk were to occur and what control measures, we had put in place for the risks.
  
 ![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%20%206.png)
+![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%20%207.png)
+![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%20%208.png)
+![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%20%209.png)
  
 ### Version Control
 We used GitHub as a Version Control System for this application, we created aa public repository which we cloned the project repository on to. We created a develop branch from the main branch, and then created feature branches based on which feature that current sprint was focusing on. This ensured that we maintain a working version of the code that we could go back to if we needed to.
 
+![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%20%2010.png)
  
 Example of the network graph for our GitHub repository, and how we have utilised branches.
+
 We added branch protection rules to our main branch as this would be the branch which would trigger a Jenkins build. These rules ensured that one other person would have to review the changes before the merge was allowed. 
 
+![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%2011.png)
  
 Example of adding everyone on the project as a collaborator.
 
- 
+ ![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%2012.png)
 Example of the branch protection rule we created for the main branch.
 
- 
+ ![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%2013.png) 
 Here is an example of one of our merge requests having to be reviewed and accepted by the other member of the team in order for the merge to take place.
 
 ### AWS Infrastructure
