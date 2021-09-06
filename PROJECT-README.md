@@ -81,9 +81,11 @@ The first thing that we did for our project was to create a list of features bas
 
 We then focused on designing what we thought the AWS architecture should be based on the brief. We used DRAWIO.IO to create this diagram, as it has a built in AWS section which allowed us to easily identify AWS services for the diagram. When creating this diagram, we were focusing on the overall structure which the infrastructure should have, as well as the ideal CIDR range for the VPC and subnets, and which ports would need to be available in the security groups for the end product to work.
  
+ ![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%202.png)
+ 
 We also created a diagram for our CI pipeline to help illustrate which parts of the pipeline would be achieved by which programme.
 
-
+![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%203.png)
 
 
 ### Project Management
