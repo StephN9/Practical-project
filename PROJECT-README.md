@@ -62,7 +62,8 @@
 * [Git]()
 * [Jira]()
 
-**Brief**
+####Brief
+
 The brief for this project was to create a completed CI Pipeline with full documentation around the utilisation of the supporting tools. The requirements of the project are as follows:
 •	A Jira board with full expansion on tasks needed to complete the project.
 •	A record of any issues or risks that we face whilst creating our project.
@@ -72,7 +73,8 @@ The brief for this project was to create a completed CI Pipeline with full docum
 •	If a change is made to the code base, Webhooks should be used so that Jenkins builds, tests and deploys the changed application.
 •	The project must make use of a reverse proxy to make the application accessible to the user.
 
-**Planning**
+####Planning
+
 The first thing that we did for our project was to create a list of features based on the brief and prioritise them using the MoSCoW methodologies. The features required for the minimum viable product were placed under the ‘Must have’ column. Then the remaining features were placed under the remaining three columns based on how difficult and time consuming they would be when compared to have much of a positive impact they would have on the end product.
  
 
@@ -84,7 +86,8 @@ We also created a diagram for our CI pipeline to help illustrate which parts of 
 
 
 
-**Project Management**
+####Project Management
+
 In order to manage our project, we used Jira Software to create an Agile Scrum Board which is based online at Atlassian (link provided under resources). We used this to create tasks based on the specification given in the brief for the project. We also created Epics to group together the tasks which were focusing on a specific aspect of the project, we ended up having five Epics which the majority of our tasks fell under when applicable; these were GitHub, AWS Architecture, Jenkins, Docker and NGINX. Each of the tasks that we created were given a story point estimate which we used to help us judge how much work we had remaining on the project. We also implemented the use of prioritisation arrows to help us determine what priority each task had based on the MoSCoW prioritisation we had previously decided.
 
 
@@ -100,7 +103,7 @@ Another area of project management that we focused on before starting to work on
  
 
  
-**Version Control**
+####Version Control
 We used GitHub as a Version Control System for this application, we created aa public repository which we cloned the project repository on to. We created a develop branch from the main branch, and then created feature branches based on which feature that current sprint was focusing on. This ensured that we maintain a working version of the code that we could go back to if we needed to.
 
  
@@ -116,13 +119,13 @@ Example of the branch protection rule we created for the main branch.
  
 Here is an example of one of our merge requests having to be reviewed and accepted by the other member of the team in order for the merge to take place.
 
-**AWS Infrastructure**
+####AWS Infrastructure
 For the Cloud based infrastructure we used AWS services to create the environment. We used a VPC with a CIDR range of 172.10.0.0/16. We then had two subnets, subnet 1 had a CIDR range of 172.10.1.0/24, this subnet contained the three EC2 instances which were used for hosting the CI Server and Docker. Subnet 2 has a CIDR range of 172.10.2.0/24 and contained the AWS RDS database which was used as the database server. Each of these subnets had a different security group attached which has specific inbound rules set up to allow the throw of traffic through whilst also ensuring that they remain as secure as possible.
  
 Example of our inbound rules for Subnet 1 which contained the EC2 instances.
 We then also created an EC2 instance within subnet 2 (which hosts the RDS database). We then also created an Internet Gateway connected to the VPC which allowed incoming traffic on port 80, and created a NAT Gateway with a route table which pointed to subnet 2 and allowed internet access to the EC within subnet 2.
 
-**CI Server**
+####CI Server
 The CI server which we are running for our project is Jenkins. This is a free and opensource automation server, which runs on port 8080. The Jenkins server uses a Jenkinsfile at the base of the directory which has the stages that Jenkins will automate in the process. Our Jenkinsfile automates the building of the images, running both the front and backend tests, and deploying the containers. 
 
  
@@ -145,13 +148,13 @@ Here is the docker-compose.yaml file we created for Jenkins to use within the st
 For each of the stages which require the docker-compose.yaml file Jenkins will copy the yaml file to a new docker-compose.yaml file, use it within the step that requires it, and then it will delete the copy which has been made within the same stage.
 Docker-compose.yaml file as a credential
 
-**Cloud Server**
+####Cloud Server
 For this project we created three EC2 (Elastic Compute Cloud) instances on AWS for our docker containers to run on, two of these were t2.Medium and one was a t2. Small. AWS manage All of the EC2 instances which we created for this project run Ubuntu 18.04, and have docker and docker-compose installed on the machine. For the EC2 instances which are used for the docker swarm containerisation we have given them a security group which has the following inbound rules which limit the amount of access people have to these instances. 
  
 To access these EC2 instances we created a specific pem keys for the project, there is one pem key which can be used to access the three instances which run docker swarm. Then there is a separate pem key which can be used to SSH into the instance within the same subnet as the RDS database.
 AWS maintain the hardware and virtualisation of these EC2 instances, and only require the user to maintain and choose the operating system which is used on the instances. This means that because of the resources available to AWS that they have a high availability in case there is a malfunction which means the hardware for one of the instances isn’t working.
 
-**Database Server**
+####Database Server
 For the database server we used an Amazon Web Service RDS. This is a Platform as a Service option which they provide for hosting databases on the Cloud. It allows you to initially chose the hardware and software you want for your database, but then AWS manage and maintain the operating system, the virtualisation and the hardware for that database.
 
  
@@ -167,14 +170,14 @@ Illustration of the docker swarm structure we created, and how these were used t
 We created three replicas for each of our containers as this ensures that there should be high availability for the application even if one of the EC2 instances goes down, or updates are being rolled out.
 
 
-**Reverse Proxy**
+####Reverse Proxy
 For our reverse proxy we used NGINX, this handles incoming traffic from the user and directs it towards the frontend applications using the nginx.conf file which we created. This means that people are able to access the webpage by using the public IP address of any of the EC2 instances, and then this will proxy pass them to the frontend application. It will then also forward any responses back to the client as well.
 
  
 Here is the nginx.conf file within our AWS structure which is mounted onto the nginx:latest image when a new container is created by docker swarm.
 
 
-**Continued Development**
+####Continued Development
 If we were to develop our project further, we would focus on:
 •	Integrating the Blue Ocean Dashboard Plugin as it makes the interface more user friendly. It also has a has a more intuitive interface when a Jenkinsfile and build fails, so the user would be able to more easily see which aspect of the build wasn’t successful. 
 •	We would also focus on creating a Multi-branch pipeline on Jenkins rather than a normal pipeline, as this would allow us to create builds from multiple branches of the Git Repository. This means that rather than having to amend the webhook when we wanted to build from a new branch, we would be able to build from multiple branches and have Jenkins categorise these based on the branch.
