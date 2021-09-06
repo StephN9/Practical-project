@@ -66,12 +66,12 @@
 
 The brief for this project was to create a completed CI Pipeline with full documentation around the utilisation of the supporting tools. The requirements of the project are as follows:
 * A Jira board with full expansion on tasks needed to complete the project.
-•	A record of any issues or risks that we face whilst creating our project.
-•	The application has to be deployed using containerisation and orchestration tools.
-•	The application has to be tested through the CI pipeline
-•	There has to be a managed Database Server
-•	If a change is made to the code base, Webhooks should be used so that Jenkins builds, tests and deploys the changed application.
-•	The project must make use of a reverse proxy to make the application accessible to the user.
+*	A record of any issues or risks that we face whilst creating our project.
+*	The application has to be deployed using containerisation and orchestration tools.
+*	The application has to be tested through the CI pipeline
+*	There has to be a managed Database Server
+*	If a change is made to the code base, Webhooks should be used so that Jenkins builds, tests and deploys the changed application.
+*	The project must make use of a reverse proxy to make the application accessible to the user.
 
 ### Planning
 
