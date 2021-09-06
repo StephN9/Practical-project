@@ -65,7 +65,7 @@
 ### Brief
 
 The brief for this project was to create a completed CI Pipeline with full documentation around the utilisation of the supporting tools. The requirements of the project are as follows:
-•	A Jira board with full expansion on tasks needed to complete the project.
+* A Jira board with full expansion on tasks needed to complete the project.
 •	A record of any issues or risks that we face whilst creating our project.
 •	The application has to be deployed using containerisation and orchestration tools.
 •	The application has to be tested through the CI pipeline
