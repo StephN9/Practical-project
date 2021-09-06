@@ -3,10 +3,12 @@ pipeline{
   stages{
     stage('build'){
       steps{
-        withCredentials([file(credentialsId: 'DOCKER_COMPOSE', variable: 'DOCKER_COMPOSE')]) {
-          sh 'cp "$DOCKER_COMPOSE" ./docker-compose.yaml'
-          sh 'docker-compose build'
-          sh 'rm docker-compose.yaml'
+        withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable:'USERNAME',passwordVariable:"PASSWORD")]){
+            withCredentials([file(credentialsId: 'DOCKER_COMPOSE', variable: 'DOCKER_COMPOSE')]) {
+            sh 'cp "$DOCKER_COMPOSE" ./docker-compose.yaml'
+            sh 'docker-compose build; rm docker-compose.yaml'
+            sh 'docker login -u $USERNAME -p $PASSWORD; docker push stephnorman/projectfrontend:latest; docker push stephnorman/projectbackend:latest'
+            }
         }
       }
     }
