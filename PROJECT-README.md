@@ -81,7 +81,7 @@ The first thing that we did for our project was to create a list of features bas
 
 We then focused on designing what we thought the AWS architecture should be based on the brief. We used DRAWIO.IO to create this diagram, as it has a built in AWS section which allowed us to easily identify AWS services for the diagram. When creating this diagram, we were focusing on the overall structure which the infrastructure should have, as well as the ideal CIDR range for the VPC and subnets, and which ports would need to be available in the security groups for the end product to work.
  
- ![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%202.png)
+ ![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%20%202.png)
  
 We also created a diagram for our CI pipeline to help illustrate which parts of the pipeline would be achieved by which programme.
 
@@ -92,7 +92,7 @@ We also created a diagram for our CI pipeline to help illustrate which parts of 
 
 In order to manage our project, we used Jira Software to create an Agile Scrum Board which is based online at Atlassian (link provided under resources). We used this to create tasks based on the specification given in the brief for the project. We also created Epics to group together the tasks which were focusing on a specific aspect of the project, we ended up having five Epics which the majority of our tasks fell under when applicable; these were GitHub, AWS Architecture, Jenkins, Docker and NGINX. Each of the tasks that we created were given a story point estimate which we used to help us judge how much work we had remaining on the project. We also implemented the use of prioritisation arrows to help us determine what priority each task had based on the MoSCoW prioritisation we had previously decided.
 
-
+![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%204.png)
 
 
 
@@ -100,10 +100,11 @@ We used this Scrum Board throughout the project and created sprints for groups o
 
 
 
+![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%20%205.png)
 
 Another area of project management that we focused on before starting to work on our project, was a risk assessment matrix. We created a list of risks which we thought could negatively impact the project. We also used this throughout the project and have been adding to it when it has become apparent that a risk might occur or needs to be mitigated. We identified 10 risks that our project could be susceptible to, and created a table for these risks. Within this table we identified the following for each risk; the risk, an evaluation of the risk, the likelihood and impact, as well as how is responsible for that risk, what would happen if the risk were to occur and what control measures, we had put in place for the risks.
  
-
+![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%20%206.png)
  
 ### Version Control
 We used GitHub as a Version Control System for this application, we created aa public repository which we cloned the project repository on to. We created a develop branch from the main branch, and then created feature branches based on which feature that current sprint was focusing on. This ensured that we maintain a working version of the code that we could go back to if we needed to.
