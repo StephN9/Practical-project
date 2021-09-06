@@ -110,7 +110,7 @@ Another area of project management that we focused on before starting to work on
 ![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%20%209.png)
  
 ### Version Control
-We used GitHub as a Version Control System for this application, we created aa public repository which we cloned the project repository on to. We created a develop branch from the main branch, and then created feature branches based on which feature that current sprint was focusing on. This ensured that we maintain a working version of the code that we could go back to if we needed to.
+We used GitHub as a Version Control System for this application, we created a public repository which we cloned the project repository on to. We created a develop branch from the main branch, and then created feature branches based on which feature that current sprint was focusing on. This ensured that we maintained a working version of the code that we could go back to if we needed to.
 
 ![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%20%2010.png)
  
@@ -134,10 +134,11 @@ For the Cloud based infrastructure we used AWS services to create the environmen
  
 ![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%2014.png) 
 Example of our inbound rules for Subnet 1 which contained the EC2 instances.
-We then also created an EC2 instance within subnet 2 (which hosts the RDS database). We then also created an Internet Gateway connected to the VPC which allowed incoming traffic on port 80, and created a NAT Gateway with a route table which pointed to subnet 2 and allowed internet access to the EC within subnet 2.
+
+We then also created an EC2 instance within subnet 2 (which hosts the RDS database). We then created an Internet Gateway connected to the VPC which allowed incoming traffic on port 80, and created a NAT Gateway with a route table which pointed to subnet 2 and allowed internet access to the EC2 within subnet 2.
 
 ### CI Server
-The CI server which we are running for our project is Jenkins. This is a free and opensource automation server, which runs on port 8080. The Jenkins server uses a Jenkinsfile at the base of the directory which has the stages that Jenkins will automate in the process. Our Jenkinsfile automates the building of the images, running both the front and backend tests, and deploying the containers. 
+The CI server which we are using for our project is Jenkins. This is a free and opensource automation server, which runs on port 8080. The Jenkins server can create a pipeline either through the use of a script or a Jenkinsfile at the base of the directory which will layout what Jenkins should do for a build. Our Jenkinsfile automates the building of services, running both the front and backend tests, and deploying the containers. 
 
 ![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%2015.png)
 Here is the Jenkinsfile which we created and is stored on our manager EC2 instance.
@@ -147,12 +148,13 @@ Here is the Jenkinsfile which we created and is stored on our manager EC2 instan
 Here is an example of how the project pipeline is displayed when a new build is triggered, it demonstrates which stage of the build has either passed or failed.
 
 We have configured a webhook on our GitHub repository and on Jenkins which when the code is updated on the repository on the main branch it will trigger a new build on Jenkins. This will then automatically go through the build, test, and deploy stages stated within the Jenkinsfile. As illustrated above it will clearly indicate whether a build has succeeded or failed based on the new code which has been provided.
+
 We have also amended our Jenkinsfile so that for each build that Jenkins creates the test results for both the front and backend tests are stored as artifacts. This allows us to go back to these test coverages at a later date, as they have been turned into artifacts for each build.
 
  ![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%2017.png)
 Here is an example of the backend and frontend tests being retained as artifacts which can be accessed at a later date.
 
-In order for Jenkins to automate the CI pipeline it uses docker-compose to build the containers and docker stack to deploy the containers. However, both of these commands require Jenkins to have access to the docker-compose.yaml file in order for these commands to be automated. The docker-compose.yaml file contains both the database URI (which contains the database endpoint and password) and the secret key, both of these are variables which you don’t want available within your file structure for people to be see as they would be able to access the database. So, in order to prevent this we have the docker-compose.yaml file as a credential within Jenkins,  as this way Jenkins is able to access the file but it wouldn’t be stored anywhere within your code base, as the docker-compose.yaml file is stored locally and uploaded to Jenkins as a credential.
+In order for Jenkins to automate the CI pipeline it uses docker-compose to build the containers and docker stack to deploy the containers. However, both of these commands require Jenkins to have access to the docker-compose.yaml file in order for these commands to be automated. The docker-compose.yaml file contains both the database URI (which contains the database endpoint and password) and the secret key, both of these are variables which you don’t want available within your file structure for people to be see as they would be able to access the database. So, in order to prevent this we have the docker-compose.yaml file as a credential within Jenkins, as this way Jenkins is able to access the file but it wouldn’t be stored anywhere within your code base, as the docker-compose.yaml file is stored locally and uploaded to Jenkins as a credential.
 
  ![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%2018.png)
 Example of docker-compose.yaml file being stored as a global credential on Jenkins.
@@ -161,12 +163,11 @@ For each of the stages which require the docker-compose.yaml file Jenkins will c
 
 
 ### Cloud Server
-For this project we created three EC2 (Elastic Compute Cloud) instances on AWS for our docker containers to run on, two of these were t2.Medium and one was a t2. Small. AWS manage All of the EC2 instances which we created for this project run Ubuntu 18.04, and have docker and docker-compose installed on the machine. For the EC2 instances which are used for the docker swarm containerisation we have given them a security group which has the following inbound rules which limit the amount of access people have to these instances. 
+For this project we created three EC2 (Elastic Compute Cloud) instances on AWS for our docker containers to run on, two of these were t2.Medium and one was a t2. Small. AWS manage all of the EC2 instances which we created for this project run Ubuntu 18.04, and have docker and docker-compose installed on the machine. For the EC2 instances which are used by docker swarm for the containerisation and orchestration we have given them a security group which has the following inbound rules which limit the amount of access people have to these instances. 
 
 ![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%2020.png)
  
-To access these EC2 instances we created a specific pem keys for the project, there is one pem key which can be used to access the three instances which run docker swarm. Then there is a separate pem key which can be used to SSH into the instance within the same subnet as the RDS database.
-AWS maintain the hardware and virtualisation of these EC2 instances, and only require the user to maintain and choose the operating system which is used on the instances. This means that because of the resources available to AWS that they have a high availability in case there is a malfunction which means the hardware for one of the instances isn’t working.
+To access these EC2 instances we created specific pem keys for the project, there is one pem key which can be used to access the three instances which run docker swarm. Then there is a separate pem key which can be used to SSH into the instance within the same subnet as the RDS database. AWS maintain the hardware and virtualisation of these EC2 instances, and only require the user to maintain and choose the operating system which is used on the instances. This means that because of the resources available to AWS that they have a high availability in case there is a malfunction which means the hardware for one of the instances isn’t working.
 
 ### Database Server
 For the database server we used an Amazon Web Service RDS. This is a Platform as a Service option which they provide for hosting databases on the Cloud. It allows you to initially chose the hardware and software you want for your database, but then AWS manage and maintain the operating system, the virtualisation and the hardware for that database.
@@ -176,26 +177,27 @@ Example of our RDS database on AWS.
 
 ### Containerisation and Orchestration
 For our method of containerisation on our EC2 instances we used docker and docker-compose. We used docker to build the images for the containers which we required, we then pushed these up to docker-hub so that they were globally available.
-
  
  ![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%2022.png)
 Examples of the images we build for the project frontend application and then project backend. 
-These images were then used on the docker-compose.yaml in order for docker swarm to be able to deploy the containers (and their replicas). We used docker-swarm on our three EC2 instances to ensure that if one instance went down that there would then be another one in place which would be able to take the load from the broken container whilst maintaining high availability for the user. We had once EC2 instance which was a manager for docker swarm and then had two worker nodes (the other two EC2 instances), these nodes created an overlay network which allowed the replicas created by the docker-compose.yaml to be spread across all three instances even though the IP addresses were separate.
- 
+
+These images were then used in the docker-compose.yaml file in order for docker swarm to be able to deploy the containers (and their replicas). We used docker-swarm on our three EC2 instances to ensure that if one instance went down that there would then be another one in place which would be able to take the load from the broken container whilst maintaining high availability for the user. We had one EC2 instance which was a manager the swarm and then had two worker nodes (the other two EC2 instances), these nodes created an overlay network which allowed the replicas created by the docker-compose.yaml to be spread across all three instances even though the IP addresses were separate.
  
  ![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%2023.png)
 Illustration of the docker swarm structure we created, and how these were used to containerise and orchestrate the different applications and servers.
+
 We created three replicas for each of our containers as this ensures that there should be high availability for the application even if one of the EC2 instances goes down, or updates are being rolled out.
 
 
 ### Reverse Proxy
-For our reverse proxy we used NGINX, this handles incoming traffic from the user and directs it towards the frontend applications using the nginx.conf file which we created. This means that people are able to access the webpage by using the public IP address of any of the EC2 instances, and then this will proxy pass them to the frontend application. It will then also forward any responses back to the client as well.
+For our reverse proxy we used NGINX, this handles incoming traffic from the user and directs it towards the frontend application using the nginx.conf file which we created. This means that people are able to access the webpage by using the public IP address of any of the EC2 instances, and then this will proxy pass them to the frontend application. It will then also forward any responses back to the client as well.
 
  
 ### Continued Development
 If we were to develop our project further, we would focus on:
-•	Integrating the Blue Ocean Dashboard Plugin as it makes the interface more user friendly. It also has a has a more intuitive interface when a Jenkinsfile and build fails, so the user would be able to more easily see which aspect of the build wasn’t successful. 
-•	We would also focus on creating a Multi-branch pipeline on Jenkins rather than a normal pipeline, as this would allow us to create builds from multiple branches of the Git Repository. This means that rather than having to amend the webhook when we wanted to build from a new branch, we would be able to build from multiple branches and have Jenkins categorise these based on the branch.
+*	Integrating the Blue Ocean Dashboard Plugin as it makes the interface more user friendly. It also has a has a more intuitive interface when a Jenkinsfile and build fails, so the user would be able to more easily see which aspect of the build wasn’t successful.
+*	Going back through the Git history to remove the docker-compose.yaml commit, so that it no longer appears within the commit history. 
+*	We would also focus on creating a Multi-branch pipeline on Jenkins rather than a normal pipeline, as this would allow us to create builds from multiple branches of the Git Repository. This means that rather than having to amend the webhook when we wanted to build from a new branch, we would be able to build from multiple branches and have Jenkins categorise these based on the branch.
 
 
 
