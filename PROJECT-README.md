@@ -77,7 +77,7 @@ The brief for this project was to create a completed CI Pipeline with full docum
 
 The first thing that we did for our project was to create a list of features based on the brief and prioritise them using the MoSCoW methodologies. The features required for the minimum viable product were placed under the ‘Must have’ column. Then the remaining features were placed under the remaining three columns based on how difficult and time consuming they would be when compared to have much of a positive impact they would have on the end product.
  
-!(https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%201.png)
+![image](https://github.com/StephN9/Practical-project/blob/develop/Picutres%20for%20read%20me/picture%201.png)
 
 We then focused on designing what we thought the AWS architecture should be based on the brief. We used DRAWIO.IO to create this diagram, as it has a built in AWS section which allowed us to easily identify AWS services for the diagram. When creating this diagram, we were focusing on the overall structure which the infrastructure should have, as well as the ideal CIDR range for the VPC and subnets, and which ports would need to be available in the security groups for the end product to work.
  
