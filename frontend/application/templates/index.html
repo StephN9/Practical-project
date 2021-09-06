@@ -1,8 +1,8 @@
 {% block body_content %}
 
-    <h1>Home Page</h1>
-    <p>Here are our users:</p>
-    <form action="/" method="get">
+    <h1 style="background-color:orange">Home Page</h1>
+    <p style="background-color:orange">Here are our users:</p>
+    <form style="background-color:orange" action="/" method="get">
         {% for user in response %}
         <p>{{ user["userName"] }}</p>
         {% endfor %}
